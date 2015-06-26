@@ -10,9 +10,11 @@ library(gridExtra)
 library(RGraphics)
 library(rworldmap)
 
+setwd("~/Dropbox/Bruna.Mundim_ASN_2015_Talk")
+
+
 rm(list=ls())
 #LOAD THE NECESSARY FUNCTIONS
-setwd("~/Dropbox/Bruna.Mundim_ASN_2015_Talk")
 
 # LOAD THE DATA 
 AMNAT<-read.csv("AmNatAll.csv", dec=".", header = TRUE, sep = ",", check.names=FALSE )
@@ -32,9 +34,9 @@ TXI<-select(AMNAT, country, country.code, count.txi)
 names(TXI)[3]<-"count" #rename the column
 
 # Select the dataset you want to map
-DATA<-ALL
+ DATA<-ALL
+#  DATA<-INT
 # DATA<-TROP
-# DATA<-INT
 # DATA<-TXI
 
 DATA<-arrange(DATA, count)  #Arrange them from low to high - easier to see who is high and low
@@ -61,16 +63,25 @@ mapCountryData(sPDF, nameColumnToPlot="count") #Maps your variable of interest i
 # catMethod: ”pretty”, ”fixedWidth”, ”diverging”,”logFixedWidth”,”quantiles”,”categorical”,
 # or a numeric vector defining breaks.
 # breaks<-c(0,40,100,200,300,400,500,600,700,800)
-breaks<-seq(0, 5400, by = 5)
+ breaks<-seq(0, 5400, by = 10) #ALL
+# breaks<-seq(0, 400, by = 10) #INT
+# breaks<-seq(0, 150, by = 5) #TROP
+# breaks<-seq(0, 35, by = 5) #TROP x INT
 # breaks<-c(seq(0, 1500, by = 100),3500)
 
 # OR BETTER YET: If you wanted just to display the boundaries of the countries you have 
 # (i.e. if you had all of the Latin American countries in your data) you could do as follows, note you need to 
 # chnage my sPDF to sPDFmyCOuntries as above in filtering line:
-mapCountryData(sPDF, nameColumnToPlot="count", catMethod=breaks, 
-               colourPalette="terrain", borderCol="black",  mapTitle = "Author Home Country:  American Nat Articles \n(1900-2015)") #numCats=30
+AMNAT<-mapCountryData(sPDF, nameColumnToPlot="count", catMethod=breaks, addLegend=FALSE,
+               colourPalette="heat", borderCol="black", mapTitle = "   ", lwd=1.25) #numCats=30 lwd=lines width
 
 
+do.call( addMapLegend, c( AMNAT
+                          , legendLabels="all"
+                          , legendWidth=0.5 
+                          ,legendMar=7))  
+
+# title: "American Nat Articles \n(1900-2015)"
 
 ###BUBBLES
 mapDevice()
