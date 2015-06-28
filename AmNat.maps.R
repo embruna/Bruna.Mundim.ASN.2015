@@ -1,5 +1,12 @@
 # code for importing, sorting, and plotting maps of publications in AmNat 1900-2015 used by Bruna and Mundim
-# in talk at Evolution 2015 meeting in Brazil. Data are available at: Figshare
+# in talk at ASN/SSE/SSB 2015 in Brazil. 
+# Data/Metadata available for download at Figshare: 
+# http://figshare.com/articles/American_Naturalist_Publications_and_Author_Home_Countries_1900_2015_/1466772
+
+# If you use the data or code, please cite as follows: 
+# Bruna, Emilio (2015): American Naturalist Publications and Author Home Countries (1900-2015). 
+# Figshare. http://dx.doi.org/10.6084/m9.figshare.1466772 Retrieved --:--, Month day, year (GMT)
+
 
 library(dplyr)
 library(tidyr)
